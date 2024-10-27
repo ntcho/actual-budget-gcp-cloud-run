@@ -14,8 +14,8 @@ module "vpc" {
   subnets = [
     {
       subnet_name           = "actual-subnet"
-      subnet_ip            = "10.10.10.0/24"
-      subnet_region        = "us-central1"
+      subnet_ip             = "10.10.10.0/24"
+      subnet_region         = "us-central1"
       subnet_private_access = true
     }
   ]
@@ -37,25 +37,14 @@ module "cloud_run" {
   version = "~> 0.13.0"
 
   service_name          = "actual-server"
-  project_id           = var.project_id
-  location             = "us-central1"
-  image                = "actualbudget/actual-server:latest"
+  project_id            = var.project_id
+  location              = "us-central1"
+  image                 = "actualbudget/actual-server:latest"
   service_account_email = module.service_account.email
 
   template_annotations = {
-    "autoscaling.knative.dev/maxScale" = "3"
-    "autoscaling.knative.dev/minScale" = "1"
-    "run.googleapis.com/vpc-access-connector" = module.vpc.connector_ids["us-central1"]
+    "autoscaling.knative.dev/maxScale"     = "1"
+    "autoscaling.knative.dev/minScale"     = "1"
+    "run.googleapis.com/vpc-access-egress" = "all-traffic"
   }
-
-  env_vars = [
-    {
-      name  = "PORT"
-      value = "3000"
-    },
-    {
-      name  = "ACTUAL_UPLOAD_DIR" 
-      value = "/data"
-    }
-  ]
 }
