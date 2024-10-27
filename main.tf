@@ -14,37 +14,46 @@ module "vpc" {
   subnets = [
     {
       subnet_name           = "actual-subnet"
-      subnet_ip             = "10.10.10.0/24"
-      subnet_region         = "us-central1"
+      subnet_ip            = "10.10.10.0/24"
+      subnet_region        = var.region
       subnet_private_access = true
     }
   ]
 }
 
-# Service Account for Cloud Run
-module "service_account" {
-  source  = "terraform-google-modules/service-accounts/google"
-  version = "~> 4.2"
-
-  project_id = var.project_id
-  prefix     = "sa-actual"
-  names      = ["server"]
-}
-
-# Cloud Run service
+# Cloud Run service using v2 module
 module "cloud_run" {
-  source  = "GoogleCloudPlatform/cloud-run/google"
+  source  = "GoogleCloudPlatform/cloud-run/google//modules/v2"
   version = "~> 0.13.0"
 
-  service_name          = "actual-server"
-  project_id            = var.project_id
-  location              = "us-central1"
-  image                 = "actualbudget/actual-server:latest"
-  service_account_email = module.service_account.email
+  project_id    = var.project_id
+  location      = var.region
+  service_name  = "actual-server"
 
-  template_annotations = {
-    "autoscaling.knative.dev/maxScale"     = "1"
-    "autoscaling.knative.dev/minScale"     = "1"
-    "run.googleapis.com/vpc-access-egress" = "all-traffic"
+  containers = [
+    {
+      container_image = "actualbudget/actual-server:latest"
+    }
+  ]
+
+  vpc_access = {
+    egress = "all-traffic"
+    network_interfaces = {
+      network = module.vpc.network_name
+      subnetwork = module.vpc.subnets_names[0]
+    }
   }
+
+  volumes = {
+    gcs = {
+      bucket = "actual-server-data"
+    }
+  }
+}
+
+module "gcs_buckets" {
+  source  = "terraform-google-modules/cloud-storage/google"
+  version = "~> 8.0"
+  project_id  = var.project_id
+  names = ["actual-server-data"]
 }
