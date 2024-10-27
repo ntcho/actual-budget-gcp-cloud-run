@@ -32,6 +32,11 @@ module "cloud_run" {
   service_account_project_roles = ["roles/storage.admin"]
 
   max_instance_request_concurrency = 5
+  ingress = "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER"
+  
+  template_scaling = {
+    max_instance_count = 1
+  }
 
   containers = [
     {
