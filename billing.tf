@@ -4,10 +4,10 @@ data "google_billing_account" "account" {
 
 resource "google_billing_budget" "budget" {
   billing_account = data.google_billing_account.account.id
-  display_name    = "Monthly Budget Alert"
+  display_name    = "MonthlyBudgetAlert"
   amount {
     specified_amount {
-      currency_code = "USD"
+      currency_code = "SGD"
       units         = "1"
     }
   }
