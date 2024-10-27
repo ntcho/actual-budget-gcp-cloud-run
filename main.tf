@@ -33,6 +33,10 @@ module "cloud_run" {
   containers = [
     {
       container_image = "actualbudget/actual-server:latest"
+      ports = {
+        name = "http1"
+        port = 5006
+      }
     }
   ]
 
