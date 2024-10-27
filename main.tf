@@ -37,7 +37,7 @@ module "cloud_run" {
   ]
 
   vpc_access = {
-    egress = "all-traffic"
+    egress = "ALL_TRAFFIC"
     network_interfaces = {
       network    = module.vpc.network_name
       subnetwork = module.vpc.subnets_names[0]
