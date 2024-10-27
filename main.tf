@@ -30,12 +30,14 @@ module "cloud_run" {
   location     = var.region
   service_name = "actual-server"
 
+  max_instance_request_concurrency = 5
+
   containers = [
     {
       container_image = "actualbudget/actual-server:latest"
       ports = {
         name = "http1"
-        port = 5006
+        container_port = 5006
       }
     }
   ]
@@ -54,6 +56,8 @@ module "cloud_run" {
       bucket = var.gcs_bucket_name
     }
   }]
+
+  depends_on = [module.gcs_buckets]
 }
 
 module "gcs_buckets" {
@@ -61,4 +65,5 @@ module "gcs_buckets" {
   version    = "~> 8.0"
   project_id = var.project_id
   names      = [var.gcs_bucket_name]
+  location   = var.region
 }
