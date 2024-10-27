@@ -14,3 +14,8 @@ variable "gcs_bucket_name" {
   type        = string
   default     = "actual-server-data"
 }
+
+variable "billing_account_id" {
+  description = "The billing account ID"
+  type        = string
+}
