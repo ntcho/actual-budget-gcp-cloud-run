@@ -32,7 +32,7 @@ module "cloud_run" {
   service_account_project_roles = ["roles/storage.admin"]
 
   max_instance_request_concurrency = 5
-  ingress = "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER"
+  ingress = "INGRESS_TRAFFIC_ALL"
   
   template_scaling = {
     max_instance_count = 1
@@ -64,6 +64,16 @@ module "cloud_run" {
   }]
 
   depends_on = [module.gcs_buckets]
+}
+
+resource "google_cloud_run_service_iam_binding" "default" {
+  project  = var.project_id
+  location = module.cloud_run.location
+  service  = module.cloud_run.service_name
+  role     = "roles/run.invoker"
+  members = [
+    "allUsers"
+  ]
 }
 
 module "gcs_buckets" {
