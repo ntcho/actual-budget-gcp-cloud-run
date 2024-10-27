@@ -8,3 +8,9 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
+
+variable "gcs_bucket_name" {
+  description = "The name of the GCS bucket"
+  type        = string
+  default     = "actual-server-data"
+}

@@ -46,7 +46,7 @@ module "cloud_run" {
 
   volumes = {
     gcs = {
-      bucket = "actual-server-data"
+      bucket = var.gcs_bucket_name
     }
   }
 }
@@ -55,5 +55,5 @@ module "gcs_buckets" {
   source  = "terraform-google-modules/cloud-storage/google"
   version = "~> 8.0"
   project_id  = var.project_id
-  names = ["actual-server-data"]
+  names = [var.gcs_bucket_name]
 }
