@@ -29,6 +29,7 @@ This is a Terraform configuration for deploying the Actual Budget server to a Cl
     gcloud services enable run.googleapis.com
     gcloud services enable iam.googleapis.com
     gcloud services enable compute.googleapis.com
+    gcloud services enable cloudresourcemanager.googleapis.com
     ```
 1. Run `terraform init` to initialize the project.
 1. Run `terraform apply` to deploy the project.
