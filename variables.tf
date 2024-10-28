@@ -17,7 +17,6 @@ variable "cloud_run_service_name" {
 variable "gcs_bucket_name" {
   description = "The name of the GCS bucket"
   type        = string
-  default     = "actual-server-data"
 }
 
 variable "billing_account_id" {
