@@ -28,7 +28,7 @@ module "cloud_run" {
 
   project_id                    = var.project_id
   location                      = var.region
-  service_name                  = "actual-server"
+  service_name                  = var.cloud_run_service_name
   service_account_project_roles = ["roles/storage.admin"]
 
   max_instance_request_concurrency = 5
