@@ -44,7 +44,11 @@ module "cloud_run" {
       ports = {
         name           = "http1"
         container_port = 5006
-      }
+      },
+      volume_mounts = [{
+        name       = "actual-server-data"
+        mount_path = "/data"
+      }]
     }
   ]
 
