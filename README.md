@@ -22,5 +22,13 @@ This is a Terraform configuration for deploying the Actual Budget server to a Cl
     ```
     The `cloud_run_service_name` can be anything you want.
 1. Run `gcloud auth application-default login` to authenticate with Google Cloud.
+1. Enable GCP services in the project:
+    ```bash
+    gcloud services enable cloudbilling.googleapis.com
+    gcloud services enable billingbudgets.googleapis.com
+    gcloud services enable run.googleapis.com
+    gcloud services enable iam.googleapis.com
+    gcloud services enable compute.googleapis.com
+    ```
 1. Run `terraform init` to initialize the project.
 1. Run `terraform apply` to deploy the project.
