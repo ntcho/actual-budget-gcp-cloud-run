@@ -17,6 +17,7 @@ This is a Terraform configuration for deploying the Actual Budget server to a Cl
     ```hcl
     project_id = "your-project-id"
     billing_account_id = "your-billing-account-id"
+    currency_code = "your-currency-code"
     cloud_run_service_name = "your-cloud-run-service-name"
     ```
     The `cloud_run_service_name` can be anything you want.

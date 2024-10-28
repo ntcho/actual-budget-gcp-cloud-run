@@ -7,7 +7,7 @@ resource "google_billing_budget" "budget" {
   display_name    = "MonthlyBudgetAlert"
   amount {
     specified_amount {
-      currency_code = "SGD"
+      currency_code = var.currency_code
       units         = "1"
     }
   }

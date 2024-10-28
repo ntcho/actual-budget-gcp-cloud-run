@@ -24,3 +24,8 @@ variable "billing_account_id" {
   description = "The billing account ID"
   type        = string
 }
+
+variable "currency_code" {
+  description = "The currency code"
+  type        = string
+}
