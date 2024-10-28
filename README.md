@@ -6,11 +6,11 @@ This is a Terraform configuration for deploying the Actual Budget server to a Cl
 
 1. Terraform CLI
 1. Google Cloud CLI
-2. HCP Terraform account
+2. HCP Terraform account with a workspace created (ensure the "Execution Mode" is set to "Local".)
 
 ### Instructions
 
-1. In provider.tf, set the `organization` and `workspace` to your HCP organization and workspace. Ensure the "Execution Mode" is set to "Local".
+1. In provider.tf, set the `organization` and `workspace` to your HCP organization and workspace.
 1. Create a new project in Google Cloud Console.
 1. Find your project ID and billing account ID.
 1. Create a `tfvars.auto.tfvars` file in the root of the project with the following variables:
