@@ -28,3 +28,9 @@ variable "currency_code" {
   description = "The currency code"
   type        = string
 }
+
+variable "image_tag" {
+  description = "The image tag (latest, edge, etc)"
+  type        = string
+  default     = "latest"
+}

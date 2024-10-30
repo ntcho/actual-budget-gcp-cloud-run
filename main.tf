@@ -40,7 +40,7 @@ module "cloud_run" {
 
   containers = [
     {
-      container_image = "actualbudget/actual-server:latest"
+      container_image = "actualbudget/actual-server:${var.image_tag}"
       ports = {
         name           = "http1"
         container_port = 5006
