@@ -1,25 +1,6 @@
 /**
- * Sets up VPC network and Cloud Run service for actual-server
+ * Sets up Cloud Run service for actual-server
  */
-
-# VPC Network configuration
-module "vpc" {
-  source  = "terraform-google-modules/network/google"
-  version = "~> 9.3"
-
-  project_id   = var.project_id
-  network_name = "actual-network"
-  routing_mode = "GLOBAL"
-
-  subnets = [
-    {
-      subnet_name           = "actual-subnet"
-      subnet_ip             = "10.10.10.0/24"
-      subnet_region         = var.region
-      subnet_private_access = true
-    }
-  ]
-}
 
 # Cloud Run service using v2 module
 module "cloud_run" {
@@ -51,14 +32,6 @@ module "cloud_run" {
       }]
     }
   ]
-
-  vpc_access = {
-    egress = "ALL_TRAFFIC"
-    network_interfaces = {
-      network    = module.vpc.network_name
-      subnetwork = module.vpc.subnets_names[0]
-    }
-  }
 
   volumes = [{
     name = "actual-server-data"
