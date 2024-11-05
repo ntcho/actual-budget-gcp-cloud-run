@@ -2,6 +2,23 @@
 
 This is a Terraform configuration for deploying the Actual Budget server to a Cloud Run service in GCP, which should stay under the always free tier with normal usage (as long as you are not syncing with the server for ~2 hours per day).
 
+Free tier limits for the services used:
+- Cloud Run
+    - 2 million requests per month
+    - 360,000 GB-seconds of memory, 180,000 vCPU-seconds of compute time
+    - 1 GB of outbound data transfer from North America per month
+        - This only applies if you access the site directly through the Cloud Run service URL. If you use the Firebase Hosting URL, connections are routed to North America before reaching the Cloud Run service, so this limit is not reached.
+- Cloud Storage
+    - 5 GB-months of regional storage (US regions only) per month
+- Firebase Hosting
+    - 360 MB/day ($0.15/GB thereafter)
+        - **IMPORTANT:** Exporting data from Actual Budget will count towards this limit. If you have over 10 years of transactions, consider downloading the budget files directly from the Cloud Storage bucket instead.
+
+References:
+- https://cloud.google.com/free/docs/free-cloud-features
+- https://firebase.google.com/docs/hosting/usage-quotas-pricing
+- https://firebase.google.com/pricing
+
 ### Prerequisites
 
 1. Terraform CLI
