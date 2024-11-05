@@ -46,6 +46,7 @@ References:
 1. Run `gcloud auth application-default login` to authenticate with Google Cloud.
 1. Run `terraform init` to initialize the project.
 1. Run `terraform apply` to deploy the project.
+1. Once the deployment is complete, you should see "firebase_hosting_url = ..." in the output. That is the URL you should use to access the Actual Budget site.
 
 ### Redeploying the Cloud Run Service
 
