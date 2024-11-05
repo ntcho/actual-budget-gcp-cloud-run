@@ -40,7 +40,7 @@ module "cloud_run" {
     }
   }]
 
-  depends_on = [module.gcs_buckets]
+  depends_on = [module.gcs_buckets, google_project_service.default]
 }
 
 resource "google_cloud_run_service_iam_binding" "default" {
@@ -51,6 +51,8 @@ resource "google_cloud_run_service_iam_binding" "default" {
   members = [
     "allUsers"
   ]
+
+  depends_on = [google_project_service.default]
 }
 
 module "gcs_buckets" {

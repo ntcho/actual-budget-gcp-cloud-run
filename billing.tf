@@ -26,4 +26,6 @@ resource "google_billing_budget" "budget" {
   threshold_rules {
     threshold_percent = 1.5
   }
+
+  depends_on = [google_project_service.default]
 }
