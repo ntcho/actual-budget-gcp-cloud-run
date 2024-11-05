@@ -29,3 +29,10 @@ This is a Terraform configuration for deploying the Actual Budget server to a Cl
 1. Run `gcloud auth application-default login` to authenticate with Google Cloud.
 1. Run `terraform init` to initialize the project.
 1. Run `terraform apply` to deploy the project.
+
+### Redeploying the Cloud Run Service
+
+If you wish to update the version of Actual Budget that the Cloud Run service is running:
+
+1. Run `terraform apply -replace="module.cloud_run.google_cloud_run_v2_service.main"`
+1. Then, run `terraform apply` to update other resources.
