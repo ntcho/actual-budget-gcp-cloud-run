@@ -1,9 +1,9 @@
 terraform {
   cloud {
-    organization = "Actual-Budget-Personal"
+    organization = "aprilsecond"
 
     workspaces {
-      name = "self"
+      name = "actual-budget"
     }
   }
 
